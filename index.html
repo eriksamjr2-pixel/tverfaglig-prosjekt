@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>tverfaglig prosjekt</title>
+    <!-- linker til Bootstrap CDN for ferdige klasser og komponenter -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <!-- lokal stylesheet for egne stiler -->
+    <link rel="stylesheet" href="style.css" />
+    <!--i koden over linker jeg både bootstrap og stylesheet'en min til html siden-->
+  </head>
+  <body>
+    <div class="topcontainer">
+      <!-- lager en flexcontainer som skal være på toppen av siden -->
+      <div class="overskrift">
+        <h1>SHOPSTOREMARKET</h1>
+        <!-- legger til en h1 overskrift altså et header element -->
+        <p>tverfaglig prosjekt</p>
+        <!-- legger til et avsnitt -->
+      </div>
+
+      <!-- Dropdown meny med Bootstrap-klasser -->
+      <div class="dropdown">
+        <button
+          class="btn btn-secondary dropdown-toggle"
+          type="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Dropdown button
+        </button>
+        <!-- listeelementer i dropdown -->
+        <ul class="dropdown-menu dropdown-menu-dark">
+          <li><a class="dropdown-item active" href="#">Min side</a></li>
+          <li><a class="dropdown-item active" href="#">side2</a></li>
+          <li><a class="dropdown-item active" href="#">side3</a></li>
+        </ul>
+      </div>
+      <!-- lager en dropdown meny med bootstrap klasser -->
+    </div>
+    <!-- avslutter topcontainer -->
+
+    <!-- Bootstrap JavaScript for interaktive komponenter (dropdown fungerer) -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+    <!-- linker bootstrap sitt javascript til html siden -->
+
+    <!-- Første rad: 3 like kort med bilde + knapp -->
+    <div class="topmidcontainer">
+      <!-- container for midtbilder og kort -->
+      <div class="row">
+        <!-- kolonne 1 med eget kort/box -->
+        <div class="col1">
+          <div class="card image-card">
+            <!-- bildet i kortet -->
+            <p>produktbilde</p>
+            <!-- felt under bildet med en blå bootstrap knapp -->
+            <div class="card-body">
+              <button class="btn btn-primary">knapp1</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- kolonne 2 med eget kort/box -->
+        <div class="col2">
+          <div class="card image-card">
+            <!-- bildet i kortet -->
+            <p>produktbilde</p>
+            <!-- knappfelt under bildet -->
+            <div class="card-body">
+              <button class="btn btn-primary">knapp2</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- kolonne 3 med eget kort/box -->
+        <div class="col3">
+          <div class="card image-card">
+            <!-- bildet i kortet -->
+            <p>produktbilde</p>
+            <!-- knappfelt under bildet -->
+            <div class="card-body">
+              <button class="btn btn-primary">knapp3</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- avslutter første row -->
+    </div>
+    <!-- midtcontainer for meny mellom radene -->
+
+    <!-- Andre rad: 3 like kort med bilde + knapp -->
+    <div class="topmidcontainer">
+      <!-- ny container for rad 2 -->
+      <div class="row">
+        <!-- kolonne 4 med eget kort/box -->
+        <div class="col4">
+          <div class="card image-card">
+            <!-- bildet i kortet -->
+            <p>produktbilde</p>
+            <!-- knappfelt under bildet -->
+            <div class="card-body">
+              <button class="btn btn-primary">knapp</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- kolonne 5 med eget kort/box -->
+        <div class="col5">
+          <div class="card image-card">
+            <!-- bildet i kortet -->
+            <p>produktbilde</p>
+            <!-- knappfelt under bildet -->
+            <div class="card-body">
+              <button class="btn btn-primary">knapp</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- kolonne 6 med eget kort/box -->
+        <div class="col6">
+          <div class="card image-card">
+            <!-- bildet i kortet -->
+            <p>produktbilde</p>
+            <!-- knappfelt under bildet -->
+            <div class="card-body">
+              <button class="btn btn-primary">knapp</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- avslutter andre row -->
+    </div>
+  </body>
+</html>
+<div class="bottomcontainer">
+  <!-- footer container nederst på siden -->
+  <footer>
+    <p>© 2026 Erik ingen rettigheter reservert</p>
+  </footer>
+</div>
+<!-- takk for meg -->

@@ -1,0 +1,146 @@
+/* Top container: holder tittel og dropdown sammen */
+.topcontainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 1%;
+  background-color: rgb(32, 32, 32);
+}
+
+/* Overskrift: tekstinnstillinger for header-delen */
+.overskrift {
+  align-items: left;
+  text-align: left;
+  font-family: "Arial Black", sans-serif;
+  font-size: 20px;
+  padding-right: 30%;
+  color: rgb(255, 255, 255);
+}
+
+/* Bottomcontainer (eksempel hvis brukt senere) */
+.bottomcontainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10%;
+  background-color: rgb(157, 157, 157);
+}
+.midmenu {
+  justify-content: center;
+  align-items: center;
+}
+/* Hver col*-klasse holder et kort/box sentrert i sin celle */
+.col1,
+.col2,
+.col3,
+.col4,
+.col5,
+.col6 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1px;
+}
+
+/* Container for midtinnhold (rad med kort) */
+.topmidcontainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Midt-mid container (hvis brukt) */
+.midmidcontainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Bottom-mid container (hvis brukt) */
+.bottommidcontainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Justering: større mellomrom mellom kort og mindre bokser/bilder */
+:root {
+  /* øker gap mellom kort for mer luft */
+  --card-gap: 4rem; /* økt for mer avstand mellom boksene */
+  /* gjør bildene mindre for å unngå scrolling */
+  --card-img-height: 180px; /* redusert høyde på bilder */
+}
+
+/* Gjør rader responsive: bruk flex-wrap for å få 2 rader med 3 kolonner */
+.topmidcontainer .row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--card-gap); /* bruker variabel for lett justering */
+  justify-content: center;
+}
+
+/* Hver "col" tar litt mindre enn en tredjedel for å gi mer luft mellom boksene */
+.topmidcontainer .row > div {
+  /* gir hver kolonne ca 30% av bredden og trekker fra gap så de ikke går utenfor */
+  flex: 0 0 calc(30% - calc(var(--card-gap) / 3));
+  max-width: calc(30% - calc(var(--card-gap) / 3));
+  box-sizing: border-box;
+}
+
+/* Kort / box rundt hvert bilde + knapp — hver bilde får egen box */
+.topmidcontainer .image-card {
+  border: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  /* litt intern padding for bedre visuell avstand i boksen */
+  margin: 0;
+}
+
+/* Bilde størrelse i kortet — bruker CSS-variabel for enkel justering */
+.topmidcontainer .card-img-top {
+  width: 100%;
+  height: 300px; /* bruker variabel: mindre bilder */
+  object-fit: cover;
+  display: block;
+}
+
+/* Sentrer knapp i feltet under bildet */
+.topmidcontainer .card-body {
+  padding: 0.6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Sørg for at knapp får litt plass og ikke krymper for mye */
+.topmidcontainer .card-body .btn {
+  min-width: 100px;
+}
+
+/* Mobil: 2 kolonner under 768px — behold god avstand også på mobil */
+@media (max-width: 768px) {
+  .topmidcontainer .row > div {
+    flex: 0 0 calc(50% - calc(var(--card-gap) / 4));
+    max-width: calc(50% - calc(var(--card-gap) / 4));
+  }
+  /* kortere bilder på mobil for bedre visning */
+  .topmidcontainer .card-img-top {
+    height: 140px; /* litt mindre på mobil */
+  }
+}
