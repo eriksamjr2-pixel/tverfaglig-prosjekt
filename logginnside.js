@@ -85,6 +85,7 @@ loginForm.addEventListener("submit", async (e) => {
 /** 7) Opprett bruker */
 signupForm.addEventListener("submit", async (e) => {
   e.preventDefault();
+  console.log("Signup submit trigget");
   signupMsg.textContent = "Oppretter...";
   const name = document.getElementById("signupName").value.trim();
   const email = document
