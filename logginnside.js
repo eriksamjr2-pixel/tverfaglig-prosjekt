@@ -79,7 +79,10 @@ loginForm.addEventListener("submit", async (e) => {
   });
   loginMsg.textContent = error ? "Feil: " + error.message : "Innlogget ✅";
   await refreshAuthUI();
-  if (!error) setTimeout(() => panel.classList.remove("open"), 400);
+  if (!error) {
+    window.location.href =
+      "https://eriksamjr2-pixel.github.io/tverrfaglig-prosjekt/index.html";
+  }
 });
 
 /** 7) Opprett bruker */
