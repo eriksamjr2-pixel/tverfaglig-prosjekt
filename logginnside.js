@@ -51,7 +51,7 @@ async function refreshAuthUI() {
     return;
   }
 
-  // Les rolle fra "profiles" (RLS: bruker kan bare lese sin egen rad)
+  // Les rolle fra "profiles" (hvis du har en RLS tabell)
   const { data: profile } = await supabase
     .from("profiles")
     .select("role")
@@ -59,42 +59,50 @@ async function refreshAuthUI() {
     .maybeSingle();
 
   const role = profile?.role ?? "user";
+
   loggedOut.style.display = "none";
   loggedIn.style.display = "";
   whoami.textContent = `Innlogget som ${user.email}`;
   roleBadge.textContent = `Rolle: ${role}`;
   userBadge.textContent = role === "admin" ? "Admin" : "Innlogget";
-
-  // Redirect til index.html når bruker er logget inn
-  setTimeout(() => {
-    window.location.href = "index.html";
-  }, 500);
 }
 
 /** 6) Logg inn */
 loginForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   loginMsg.textContent = "Logger inn...";
+
   const email = document.getElementById("loginEmail").value.trim();
   const pass = document.getElementById("loginPass").value;
 
-  const { error } = await supabase.auth.signInWithPassword({
+  const { data, error } = await supabase.auth.signInWithPassword({
     email,
     password: pass,
   });
-  loginMsg.textContent = error ? "Feil: " + error.message : "Innlogget ✅";
-  await refreshAuthUI();
-  if (!error) {
-    window.location.href =
-      "https://eriksamjr2-pixel.github.io/tverrfaglig-prosjekt/index.html";
+
+  if (error) {
+    loginMsg.textContent = "Feil: " + error.message;
+    return;
   }
+
+  if (!data.session) {
+    loginMsg.textContent =
+      "Epost ikke bekreftet. Sjekk innboksen din for bekreftelsesmail.";
+    return;
+  }
+
+  loginMsg.textContent = "Innlogget ✅";
+
+  // Redirect til index.html
+  window.location.href =
+    "https://eriksamjr2-pixel.github.io/tverrfaglig-prosjekt/index.html";
 });
 
 /** 7) Opprett bruker */
 signupForm.addEventListener("submit", async (e) => {
   e.preventDefault();
-  console.log("Signup submit trigget");
   signupMsg.textContent = "Oppretter...";
+
   const name = document.getElementById("signupName").value.trim();
   const email = document
     .getElementById("signupEmail")
@@ -102,15 +110,19 @@ signupForm.addEventListener("submit", async (e) => {
     .toLowerCase();
   const pass = document.getElementById("signupPass").value;
 
-  const { error } = await supabase.auth.signUp({
+  const { data, error } = await supabase.auth.signUp({
     email,
     password: pass,
     options: { data: { display_name: name } },
   });
 
-  signupMsg.textContent = error
-    ? "Feil: " + error.message
-    : "Konto opprettet ✅ Du kan logge inn nå.";
+  if (error) {
+    signupMsg.textContent = "Feil: " + error.message;
+    return;
+  }
+
+  signupMsg.textContent =
+    "Konto opprettet ✅ Sjekk epost for bekreftelse før innlogging.";
 });
 
 /** 8) Logg ut */
@@ -119,6 +131,19 @@ document.getElementById("logoutBtn").addEventListener("click", async () => {
   await refreshAuthUI();
 });
 
-/** 9) Hold UI i sync */
+/** 9) Auto-redirect hvis bruker allerede logget inn */
+async function checkSession() {
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+  if (session) {
+    window.location.href =
+      "https://eriksamjr2-pixel.github.io/tverrfaglig-prosjekt/index.html";
+  }
+}
+
+checkSession();
+
+/** 10) Hold UI i sync */
 supabase.auth.onAuthStateChange(() => refreshAuthUI());
 refreshAuthUI();
